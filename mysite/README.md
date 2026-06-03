@@ -37,7 +37,7 @@ py manage.py runserver 9581
 pip install psycopg2-binary
 py manage.py migrate
 
-##Перегляд списку бібліотек їх збереження та клонування проекту
+## Перегляд списку бібліотек їх збереження та клонування проекту
 
 pip freeze
 pip freeze > requirements.txt
