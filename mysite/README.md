@@ -30,10 +30,11 @@ python -m django --version
 mrdir silpo
 django-admin startproject mysite silpo #створюємо проект в папці сільпо
 cd silpo
-#запуск сервака
+
+# запуск сервака
 py manage.py runserver 9581 
 
-#ставим бібліотеку постгрес в наш венв
+# ставим бібліотеку постгрес в наш венв
 pip install psycopg2-binary
 py manage.py migrate
 
@@ -41,3 +42,4 @@ py manage.py migrate
 
 pip freeze
 pip freeze > requirements.txt
+
