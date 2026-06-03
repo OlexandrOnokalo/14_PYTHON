@@ -17,7 +17,7 @@ python3 -m venv .venv
 
 python.exe -m pip install --upgrade pip
 
-#установка джанго
+# установка джанго
 py -m pip install Django
 
 py
