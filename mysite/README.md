@@ -28,7 +28,8 @@ py
 
 python -m django --version
 mrdir silpo
-django-admin startproject mysite silpo #створюємо проект в папці сільпо
+# створюємо проект в папці сільпо
+django-admin startproject mysite silpo 
 cd silpo
 
 # запуск сервака
