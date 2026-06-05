@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+<header>
+    <nav class="bg-slate-900 px-6 py-4 flex items-center justify-between">
+        <!-- Лого -->
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-indigo-500 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" ...>...</svg>
+            </div>
+            <span class="text-white font-medium text-lg">MyBrand</span>
+        </div>
+
+        <!-- Навігаційні посилання -->
+        <div class="hidden md:flex items-center gap-1">
+            <a href="/" class="text-slate-400 hover:text-white hover:bg-slate-800  px-4 py-2 rounded-md text-sm transition-colors">
+                Головна
+            </a>
+            <a href="#" class="text-slate-400 hover:text-white hover:bg-slate-800 px-4 py-2 rounded-md text-sm transition-colors">
+                Про нас
+            </a>
+            <a href="#" class="text-slate-400 hover:text-white hover:bg-slate-800 px-4 py-2 rounded-md text-sm transition-colors">
+                Послуги
+            </a>
+            <a href="#" class="text-slate-400 hover:text-white hover:bg-slate-800 px-4 py-2 rounded-md text-sm transition-colors">
+                Контакти
+            </a>
+        </div>
+
+        <!-- CTA кнопка -->
+        <a href="/users/register/" class="bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors">
+            Реєстрація
+        </a>
+
+        <!-- Мобільне меню (бургер) -->
+        <button class="md:hidden text-slate-400 hover:text-white">
+            <svg class="w-6 h-6" ...>...</svg>
+        </button>
+
+    </nav>
+</header>
+<main>
+    
+    {% block content %}
+    {% endblock %}
+</main>
+</body>
+</html>
