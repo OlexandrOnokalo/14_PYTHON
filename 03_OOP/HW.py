@@ -86,5 +86,5 @@ class Stadium:
         self.capacity = int(input("Місткість: "))
 
 # Приклад використання:
-wembley = Stadium("Вемблі", "09.03.2007", "Англія", "Лондон", 90000)
-wembley.display_info()
+dinamo = Stadium("Динамо", "01.08.1955", "Україна", "Київ", 90000)
+dinamo.display_info()
