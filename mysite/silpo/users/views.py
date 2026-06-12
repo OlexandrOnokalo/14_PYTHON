@@ -34,17 +34,37 @@ def register(request):
 
     return render(request, "register.html", {"form": form})
  
+# def user_login(request):
+#     if request.method == 'POST':
+#         form = CustomUserLoginForm(data=request.POST)
+#         if form.is_valid():
+#             user = authenticate(request, username=form.cleaned_data['username'],
+#                                 password=form.cleaned_data['password'])
+#             if user is not None:
+#                 login(request, user)
+#                 return redirect('homepage')
+#             else:
+#                 print("---user not found---")
+#         else:
+#             form.add_error(None, "Невірний email або пароль")
+#             print("---form not valid---")
+#     else:
+#         form = CustomUserLoginForm()
+#     return render(request, 'login.html', {'form': form})
+
 def user_login(request):
     if request.method == 'POST':
-        form = CustomUserLoginForm(data=request.POST)
+        form = CustomUserLoginForm(request, data=request.POST)
+
         if form.is_valid():
-            user = authenticate(request, username=form.cleaned_data['email'],
-                                password=form.cleaned_data['password'])
-            if user is not None:
-                login(request, user)
-                return redirect('homepage')
+            user = form.get_user()
+            login(request, user)
+            return redirect('homepage')
+        else:
+            form.add_error(None, "Логін або пароль вказано невірно")
     else:
         form = CustomUserLoginForm()
+
     return render(request, 'login.html', {'form': form})
 
 

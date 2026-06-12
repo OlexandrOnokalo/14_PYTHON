@@ -22,16 +22,26 @@
                 </p>
                 {% endfor %}
                 {% endfor %}
+
+                {% if form.non_field_errors %}
+                <div class="flex items-center gap-2">
+                    {% for error in form.non_field_errors %}
+                    {{ error }}
+                    {% endfor %}
+                </div>
+                {% endif %}
             </div>
             {% endif %}
 
+
+
             <div>
                 <label class="block text-sm font-medium text-gray-300 mb-2">
-                    {{form.email.label}}
+                    {{form.username.label}}
                 </label>
-                {{form.email}}
-                {% if form.email.errors %}
-                <div class="mt-1 text-sm text-red-400">{{ form.email.errors }}</div>
+                {{form.username}}
+                {% if form.username.errors %}
+                <div class="mt-1 text-sm text-red-400">{{ form.username.errors }}</div>
                 {% endif %}
             </div>
 
@@ -44,7 +54,7 @@
                 <div class="mt-1 text-sm text-red-400">{{ form.password.errors }}</div>
                 {% endif %}
             </div>
-            
+
             <button
                     type="submit"
                     class="w-full rounded-lg bg-indigo-600 py-3 font-semibold text-white transition hover:bg-indigo-500">

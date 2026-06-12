@@ -12,7 +12,7 @@ def compress_image(image_field, size=(800,800),quality=85):
     image.thumbnail(size, Image.LANCZOS)
     # створюємо унікальне ім'я файлу
     uid = str(uuid.uuid4())[:10] # 10 символів назви
-    image.name='{}.weebp'.format(uid) # змінюємо розширення на webp
+    image.name='{}.webp'.format(uid) # змінюємо розширення на webp
     # зберігаємо стиснуте зображення в пам'яті
     output = io.BytesIO()
     # перетворюємо зображення в формат WEBP з заданою якістю
