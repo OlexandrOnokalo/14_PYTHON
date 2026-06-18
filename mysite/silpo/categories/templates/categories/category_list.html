@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="min-h-screen bg-gray-900 py-10 px-4">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
+      <h2 class="text-3xl font-bold text-white">Категорії</h2>
+
+      {% if user.is_authenticated %}
+        <a href="{% url 'categories:create' %}"
+           class="inline-flex items-center gap-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+          Створити категорію
+        </a>
+      {% endif %}
+    </div>
+
+    {% if categories %}
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+        {% for cat in categories %}
+          <div class="flex flex-col overflow-hidden rounded-2xl bg-gray-800 shadow-xl">
+            <img src="/images/categories/{{ cat.image }}"
+                 alt="{{ cat.name }}"
+                 class="h-48 w-full object-cover">
+
+            <div class="flex flex-grow flex-col p-5">
+              <h5 class="mb-2 text-center text-lg font-bold text-white">{{ cat.name }}</h5>
+
+              {% if cat.slug %}
+                <div class="mb-3 flex justify-center">
+                  <span class="rounded-full border border-indigo-500/30 bg-indigo-500/10 px-2.5 py-1 font-mono text-xs text-indigo-400">
+                    {{ cat.slug }}
+                  </span>
+                </div>
+              {% endif %}
+
+              <p class="flex-grow text-sm text-gray-400">
+                {{ cat.description|truncatechars:100 }}
+              </p>
+
+
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+    {% else %}
+      <div class="py-16 text-center">
+        <h4 class="text-xl text-gray-400">Категорій ще немає</h4>
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% endblock %}

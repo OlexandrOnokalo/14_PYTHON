@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
+    'categories'
 ]
 
 MIDDLEWARE = [
@@ -140,3 +141,11 @@ DJANGORESIZED_DEFAULT_KEEP_META = True
 DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'WEBP'
 DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'WEBP': ".webp"}
 DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.ukr.net'
+EMAIL_PORT = 2525
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'olexandr.onokalo@ukr.net'
+EMAIL_HOST_PASSWORD = '5rGyOZwkfBKIfxtr'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

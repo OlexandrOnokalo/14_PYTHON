@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-900 px-4 py-10">
+    <div class="w-full max-w-xl rounded-2xl bg-gray-800 p-8 shadow-xl">
+
+        <h1 class="text-3xl font-bold text-center text-white mb-8">
+            Створити категорію
+        </h1>
+
+        <form method="post" enctype="multipart/form-data" class="space-y-5">
+            {% csrf_token %}
+
+            <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">{{ form.name.label }}</label>
+                {{ form.name }}
+                {% if form.name.errors %}
+                    <div class="mt-1 text-sm text-red-400">{{ form.name.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">{{ form.description.label }}</label>
+                {{ form.description }}
+                {% if form.description.errors %}
+                    <div class="mt-1 text-sm text-red-400">{{ form.description.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">{{ form.slug.label }}</label>
+                {{ form.slug }}
+                {% if form.slug.errors %}
+                    <div class="mt-1 text-sm text-red-400">{{ form.slug.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">{{ form.image.label }}</label>
+                {{ form.image }}
+                {% if form.image.errors %}
+                    <div class="mt-1 text-sm text-red-400">{{ form.image.errors }}</div>
+                {% endif %}
+
+                <img id="img-preview"
+                     src="#"
+                     alt="Превью"
+                     class="hidden mt-3 max-h-52 w-full rounded-lg object-cover">
+            </div>
+
+            <button type="submit"
+                    class="w-full rounded-lg bg-indigo-600 py-3 font-semibold text-white transition hover:bg-indigo-500">
+                Створити категорію
+            </button>
+
+        </form>
+    </div>
+</div>
+
+<script>
+  function slugify(text) {
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/[абвгґдеєжзиіїйклмнопрстуфхцчшщьюяъыэё]/g, function(char) {
+        const map = {
+          'а':'a','б':'b','в':'v','г':'h','ґ':'g','д':'d','е':'e','є':'ie',
+          'ж':'zh','з':'z','и':'y','і':'i','ї':'i','й':'i','к':'k','л':'l',
+          'м':'m','н':'n','о':'o','п':'p','р':'r','с':'s','т':'t','у':'u',
+          'ф':'f','х':'kh','ц':'ts','ч':'ch','ш':'sh','щ':'shch','ь':'',
+          'ю':'iu','я':'ia','ъ':'','ы':'y','э':'e','ё':'io'
+        };
+        return map[char] || char;
+      })
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
+  }
+
+  const nameInput = document.querySelector('input[name="name"]');
+  const slugInput = document.querySelector('input[name="slug"]');
+
+  nameInput.addEventListener('input', function () {
+    if (!slugInput.dataset.manual) {
+      slugInput.value = slugify(this.value);
+    }
+  });
+
+  slugInput.addEventListener('input', function () {
+    this.dataset.manual = 'true';
+  });
+
+  slugInput.addEventListener('blur', function () {
+    if (this.value === '') {
+      delete this.dataset.manual;
+      this.value = slugify(nameInput.value);
+    }
+  });
+</script>
+
+{% endblock %}
