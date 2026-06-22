@@ -51,6 +51,11 @@ py manage.py migrate
 pip freeze
 pip freeze > requirements.txt
 ```
+## Встанновлення з  requirements.txt
+```
+pip install -r requirements.txt
+```
+
 ## Додаю superuser
 ```
 python manage.py createsuperuser
@@ -87,3 +92,11 @@ py manage.py migrate
 py manage.py makemigrations products
 py manage.py migrate
 ```
+
+## Seed data Django
+```
+pip install requests
+python manage.py seed_data
+
+python manage.py seed_data --clear
+``` 

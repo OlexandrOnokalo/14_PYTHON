@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="min-h-screen bg-gray-900 py-10 px-4">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
+      <h2 class="text-3xl font-bold text-white">Продукти</h2>
+
+      {% if user.is_authenticated %}
+        <a href=""
+           class="inline-flex items-center gap-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+          Створити продукт
+        </a>
+      {% endif %}
+    </div>
+
+    {% if products %}
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+        {% for product in products %}
+          <div class="flex flex-col overflow-hidden rounded-2xl bg-gray-800 shadow-xl">
+
+            {% with product.images.first as main_image %}
+              {% if main_image %}
+                <img src="{{ main_image.image.url }}"
+                     alt="{{ product.name }}"
+                     class="h-48 w-full object-cover">
+              {% else %}
+                <div class="h-48 w-full bg-gray-700 flex items-center justify-center">
+                  <svg class="w-12 h-12 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+              {% endif %}
+            {% endwith %}
+
+            <div class="flex flex-grow flex-col p-5">
+              <h5 class="mb-1 text-center text-lg font-bold text-white">{{ product.name }}</h5>
+
+              <div class="mb-3 flex justify-center">
+                <a href=""
+                   class="rounded-full border border-violet-500/30 bg-violet-500/10 px-2.5 py-1 text-xs font-medium text-violet-400 hover:bg-violet-500/20 transition">
+                  {{ product.category.name }}
+                </a>
+              </div>
+
+              {% if product.slug %}
+                <div class="mb-3 flex justify-center">
+                  <span class="rounded-full border border-indigo-500/30 bg-indigo-500/10 px-2.5 py-1 font-mono text-xs text-indigo-400">
+                    {{ product.slug }}
+                  </span>
+                </div>
+              {% endif %}
+
+              <p class="flex-grow text-sm text-gray-400">
+                {{ product.description|truncatechars:100 }}
+              </p>
+
+              <div class="mt-4 flex items-center justify-between">
+                <span class="text-lg font-bold text-emerald-400">{{ product.price }} ₴</span>
+              </div>
+
+              <div class="mt-4 grid grid-cols-2 gap-3">
+                <form action=""
+                      method="POST"
+                      class="inline-block"
+                      onsubmit="return confirm('Ви впевнені?')">
+                  {% csrf_token %}
+                  <button type="submit"
+                          class="w-full inline-flex items-center justify-center rounded-lg bg-rose-600 hover:bg-rose-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition">
+                    Видалити
+                  </button>
+                </form>
+                <a class="inline-flex items-center justify-center rounded-lg bg-emerald-600 hover:bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition"
+                   href="">
+                  Редагувати
+                </a>
+              </div>
+
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+    {% else %}
+      <div class="py-16 text-center">
+        <h4 class="text-xl text-gray-400">Продуктів ще немає</h4>
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% endblock %}
